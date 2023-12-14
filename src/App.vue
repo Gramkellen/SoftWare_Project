@@ -1,34 +1,42 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/evenness">平整度检测</router-link> |
-    <router-link to="/crack">幕墙爆裂检测</router-link>
-  </nav>
-  <router-view/>
+  <el-menu
+    :default-active="activeIndex"
+    class="el-menu-demo"
+    mode="horizontal"
+    @select="handleSelect"
+  >
+    <el-menu-item index="/">Home</el-menu-item>
+    <el-menu-item index="/evenness">平整度检测</el-menu-item>
+    <el-menu-item index="/crack">幕墙爆裂检测</el-menu-item>
+  </el-menu>
+  <router-view />
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+const activeIndex = ref(router.currentRoute.value.path)
+
+const handleSelect = (key) => {
+  console.log(key)
+  router.push(key)
+}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
+.el-menu-demo {
   padding: 30px;
 
-  a {
+  .el-menu-item {
     font-weight: bold;
     color: #2c3e50;
+    border-bottom: none; // 取消底部边框
 
-    &.router-link-exact-active {
+    &.is-active, &.is-active:hover {
       color: #1d719e;
+      border-bottom: none; // 取消底部边框
     }
   }
 }
