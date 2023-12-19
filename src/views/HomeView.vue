@@ -7,23 +7,61 @@
       <div class="title-container">
         <p class="title">玻璃幕墙信息系统</p>
       </div>
-    </div>
-    <div class="brief-introduction-container">
-      <p class="brief-introduction">
-        您可以选择最上方的“平整度检测”或“玻璃玻璃幕墙爆裂检测” <br/> 并上传相应的图片，以获得您想了解的信息
-      </p>
+      <div class="brief-introduction-container">
+        <el-tooltip
+        class="tooltip"
+        effect="dark"
+        placement="top"
+        >
+          <template #content> 上传幕墙图片，<br />获知幕墙表面是否平整 </template>
+          <el-button 
+          class="next-page-button" 
+          @click="toEvennessPage"
+          round
+          type="primary"
+          >
+            平整度检测
+          </el-button>
+        </el-tooltip>
+
+        <el-tooltip
+        class="tooltip"
+        effect="dark"
+        placement="top"
+        >
+          <template #content> 上传幕墙图片，<br />获知幕墙玻璃表面爆裂信息 </template>
+          <el-button 
+          class="next-page-button"
+          @click="toCrackPage"
+          round
+          type="primary"
+          >
+            玻璃爆裂检测
+          </el-button>
+        </el-tooltip>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const show = ref(false);
+const router = useRouter();
 
 const handleImageLoad = () => {
   show.value = true;
 };
+
+const toEvennessPage = () => {
+  router.push('/evenness');
+}
+
+const toCrackPage = () => { 
+  router.push('/crack');
+}
 
 onMounted(() => {
   setTimeout(() => {
@@ -62,5 +100,12 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   text-align: center;
+  position: absolute;
+  top:65%;
+  left:41.5%;
+}
+
+.next-page-button {
+  margin-right: 5%;
 }
 </style>
