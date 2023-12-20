@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p class="page-title">玻璃幕墙平整度检测</p>
         <p class="tips">请您上传一张图片</p>
         <ImgUpload 
         @confirmUpload="confirmUpload"
@@ -154,5 +155,12 @@ const onCancel = () => {
 .sub-tips-item {
     font-weight: bolder;
     display: inline-block;
+}
+
+.page-title {
+    font-size: 24px; /* 设置标题字体大小 */
+    font-weight: bold; /* 设置标题粗细 */
+    text-align: center; /* 居中对齐 */
+    margin-bottom: 20px; /* 下方间距 */
 }
 </style>
