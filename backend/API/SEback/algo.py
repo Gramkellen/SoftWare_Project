@@ -14,7 +14,7 @@ def Classify(filename):
     # cv2.imread()用于读取图片文件
     filename = os.path.normpath(filename)
     image = cv2.imread(filename)
-
+    #print("1111")
     # cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -44,9 +44,9 @@ def Classify(filename):
     model.load_state_dict(torch.load("/root/code/SoftWare_Project/backend/API/SEback/New-resnet18-2Class.pth")) #路径需要修改
     #这里需要Debug
     #下面部分没有问题
-    print("pppppppppppppppppppppppppppp")
+    #print("pppppppppppppppppppppppppppp")
     model.eval()
-    print("ccc")
+    #print("ccc")
     with torch.no_grad():
         tf = transforms.Compose([
                     lambda x: x.convert('RGB'),
@@ -68,3 +68,10 @@ def Classify(filename):
         else:
              print("碎玻璃\n")
              return False
+
+
+def saveImage(cv_img,imageName):
+    rgb_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
+    pil_img = Image.fromarray(rgb_img)
+    pil_img.save("/root/code/SoftWare_Project/backend/API/SEback/detect_border/output/" + imageName)
+    return imageName

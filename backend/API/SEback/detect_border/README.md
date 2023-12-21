@@ -57,3 +57,32 @@ python deploy/python/infer.py --config inference_model/deploy.yaml --image_path 
 直接运行run.py文件会使用我提供的2023_200003.jpg图片进行测试，结果保存在output文件夹中。
 
 可以在run.py文件内修改图片路径和存储路径。
+
+------
+
+## 运行更新
+
+调用run.py中的`border_flat_detect(image_path, save_dir="output")`函数就可以直接执行结构胶检测和平整度检测。
+
+参数说明：
+
+- image_path：图片路径。由你给出
+- save_dir：结构胶检测结果图片保存路径。默认值为save_dir = "output"，即结果图片将保存在当前文件夹下的output文件夹中。如果不指定将直接使用默认值，可以参考代码中测试部分的使用方法。
+
+返回值说明：
+
+- original_image：原始图像
+- overlay_result_on_original：结构胶检测的图像
+- marked_image：边缘拟合后图像
+- horizontal_parallel：水平方向直线平行关系
+- vertical_parallel：竖直方向直线平行关系
+
+其中`original_image`、`overlay_result_on_original`、`marked_image` 是 NumPy 数组，相当于`cv2.imread()` 读取图像后返回的结果。
+
+如果需要保存图像可以调用完该函数再对相关图片进行保存；或者在`border_flat_detect`函数进行保存，将返回值修改为图像对应的保存路径。**这里请根据后端图像存储及传输需求自行修改。**
+
+`horizontal_parallel`和 `vertical_parallel`是bool值，即为True或False。
+
+#### 补充说明
+
+直接运行run.py会显示我给出的测试结果，即`if __name__ == "__main__"`下的内容。如果只是调用`border_flat_detect`函数将不会运行测试内容。
